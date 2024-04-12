@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Sharing Platform</title>
+    <style>
+        .recipe {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+        .recipe h2 {
+            text-align: center;
+        }
+        .recipe ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .recipe ol {
+            list-style-type: decimal;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe Sharing Platform</h1>
+    <div>
+        <a href="#add_recipe">Add Recipe</a>
+    </div>
+    {% for recipe in recipes %}
+        <div class="recipe">
+            <h2>{{ recipe.title }}</h2>
+            <p><strong>Ingredients:</strong></p>
+            <ul>
+                {% for ingredient in recipe.ingredients %}
+                    <li>{{ ingredient }}</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Instructions:</strong></p>
+            <ol>
+                {% for step in recipe.instructions %}
+                    <li>{{ step }}</li>
+                {% endfor %}
+            </ol>
+        </div>
+    {% endfor %}
+
+    <h2 id="add_recipe">Add Recipe</h2>
+    <form action="/add_recipe" method="post">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" required><br><br>
+        <label for="ingredients">Ingredients:</label><br>
+        <textarea id="ingredients" name="ingredients" rows="4" required></textarea><br><br>
+        <label for="instructions">Instructions:</label><br>
+        <textarea id="instructions" name="instructions" rows="8" required></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+
+
+
+
+
